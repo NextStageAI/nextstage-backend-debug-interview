@@ -3,51 +3,5 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Attach to Textify",
-      "port": 10229,
-      "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node",
-      "remoteRoot": "/usr/src/app",
-      "localRoot": "${workspaceFolder}/backend"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Debug File",
-      "program": "${file}",
-
-      "runtimeExecutable": "${workspaceFolder}/backend/node_modules/.bin/babel-node",
-      "runtimeArgs": ["-x", "\".ts\""],
-      "cwd": "${workspaceFolder}/backend"
-    },
-    {
-      "name": "Launch Chrome Debug",
-      "request": "launch",
-      "type": "pwa-chrome",
-      "url": "http://localhost:3055",
-      "webRoot": "${workspaceFolder}/frontend"
-    },
-
-    {
-      "name": "Attach to Server",
-      "port": 9229,
-      "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node",
-      "remoteRoot": "/usr/src/app",
-      "localRoot": "${workspaceFolder}/backend"
-    },
-    {
-      "name": "Attach to Analytics",
-      "port": 8229,
-      "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node",
-      "remoteRoot": "/usr/src/app",
-      "localRoot": "${workspaceFolder}/backend"
-    }
-  ]
+  "configurations": []
 }
