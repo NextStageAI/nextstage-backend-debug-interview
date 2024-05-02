@@ -1,7 +1,40 @@
-import { PrismaClient } from "@prisma/client";
-import { CustomField } from "src/types/custom-field";
+import { Opportunity, PrismaClient } from "@prisma/client";
+import { CustomField } from "@src/types/custom-field";
 
-export async function exportOpportunitiesToCSV(
+function createCSVRowFromOpportunityData(
+  opportunity: Opportunity,
+  workspaceCustomFields: CustomField[]
+) {
+  const opportunityData = JSON.parse(opportunity.opportunityData);
+
+  const row =
+    opportunity.title +
+    "," +
+    // For each custom field defined in the workspace, look up the value
+    // for that field in the opportunity data and add it to the CSV row
+    workspaceCustomFields
+      .map((field: CustomField) => {
+        const fieldValue = opportunityData[field.id];
+
+        // If the opportunity does not have a value for this field, return "N/A"
+        if (!fieldValue) {
+          return "N/A";
+        }
+
+        if (field.type === "multi-dropdown") {
+          return fieldValue.value.label;
+        } else if (field.type === "date") {
+          return fieldValue.value;
+        } else {
+          return "N/A";
+        }
+      })
+      .join(",");
+
+  return row;
+}
+
+export async function exportWorkspaceOpportunitiesToCSV(
   prisma: PrismaClient,
   workspaceId: number
 ) {
@@ -29,28 +62,10 @@ export async function exportOpportunitiesToCSV(
 
   const opportunitiesCSV = opportunities
     .map((opportunity) => {
-      const opportunityData = JSON.parse(opportunity.opportunityData);
-
-      const row =
-        opportunity.title +
-        "," +
+      const row = createCSVRowFromOpportunityData(
+        opportunity,
         workspaceCustomFields
-          .map((field: CustomField) => {
-            const fieldValue = opportunityData[field.id];
-            if (!fieldValue) {
-              return "N/A";
-            }
-
-            if (field.type === "multi-dropdown") {
-              return fieldValue.value.label;
-            } else if (field.type === "date") {
-              return fieldValue.value;
-            } else {
-              return "N/A";
-            }
-          })
-          .join(",");
-
+      );
       return row;
     })
     .join("\n");

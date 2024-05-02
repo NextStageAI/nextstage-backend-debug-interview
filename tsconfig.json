@@ -6,6 +6,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
@@ -13,10 +14,13 @@
     "declaration": true,
     "outDir": "./dist",
     "lib": ["esnext"],
+    "paths": {
+      "@src/*": ["src/*"]
+    }
   },
   "typeAcquisition": {
     "include": ["jest"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "prisma/**/*.ts"],
   "exclude": ["dist", "node_modules", "src/**/*.test.ts"]
 }
