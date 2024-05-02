@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "prisma": {
+    "seed": "npx ts-node ./prisma/seed.ts "
+  },
   "scripts": {
+    "start": "npx prisma generate && prisma migrate reset --force && ts-node src/main.ts",
     "test": "jest"
   },
   "repository": {
