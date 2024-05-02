@@ -22,5 +22,5 @@
     "include": ["jest"]
   },
   "include": ["src/**/*.ts", "prisma/**/*.ts"],
-  "exclude": ["dist", "node_modules", "src/**/*.test.ts"]
+  "exclude": ["dist", "node_modules"]
 }

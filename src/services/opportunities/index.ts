@@ -34,27 +34,18 @@ function createCSVRowFromOpportunityData(
   return row;
 }
 
-export async function exportWorkspaceOpportunitiesToCSV(
-  prisma: PrismaClient,
-  workspaceId: number
-) {
-  const workspace = await prisma.workspace.findUnique({
-    where: {
-      id: workspaceId,
-    },
-  });
+export async function exportWorkspaceOpportunitiesToCSV(prisma: PrismaClient) {
+  const workspace = await prisma.workspace.findFirst();
 
   if (!workspace) {
     throw new Error("Workspace not found");
   }
 
-  const workspaceCustomFields = JSON.parse(workspace.customFieldDefinition);
+  const workspaceCustomFields: CustomField[] = JSON.parse(
+    workspace.customFieldDefinition
+  );
 
-  const opportunities = await prisma.opportunity.findMany({
-    where: {
-      workspaceId: workspaceId,
-    },
-  });
+  const opportunities = await prisma.opportunity.findMany();
 
   const headerCSV =
     "Title," +
@@ -71,16 +62,4 @@ export async function exportWorkspaceOpportunitiesToCSV(
     .join("\n");
 
   return headerCSV + "\n" + opportunitiesCSV;
-}
-
-export async function searchOpportunities(prisma: PrismaClient, query: string) {
-  const opportunities = await prisma.opportunity.findMany({
-    where: {
-      title: {
-        contains: query,
-      },
-    },
-  });
-
-  return opportunities;
 }

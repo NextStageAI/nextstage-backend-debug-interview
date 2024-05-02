@@ -11,13 +11,16 @@ const app = express();
 app.use(express.json());
 
 app.get("/opportunities/export", async (req, res) => {
-  const { workspace_id: workspaceId } = req.body;
-
-  const csv = await exportWorkspaceOpportunitiesToCSV(prisma, workspaceId);
+  const csv = await exportWorkspaceOpportunitiesToCSV(prisma);
 
   res.setHeader("Content-Type", "text/csv");
   res.send(csv);
   res.end();
+});
+
+app.get("/opportunities/search", async (req, res) => {
+  // Implement me!
+  res.sendStatus(404);
 });
 
 app.listen(PORT, () => {

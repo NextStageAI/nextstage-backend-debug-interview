@@ -20,13 +20,12 @@ describe("Should serialize opportunities to CSV", () => {
   });
 
   it("should serialize opportunities to CSV", async () => {
-    const workspaceId = 1;
-    const csv = await exportWorkspaceOpportunitiesToCSV(prisma, workspaceId);
+    const csv = await exportWorkspaceOpportunitiesToCSV(prisma);
     expect(csv).toEqual(
       `
 Title,Custom Field 1,Custom Field 2
 Opportunity 1,Option 1,N/A
-Opportunity 2,Option 1,2021-01-01
+Opportunity 2,Option 2 Changed,2021-01-01
 Opportunity 3,Option 1,2023-01-01
     `.trim()
     );

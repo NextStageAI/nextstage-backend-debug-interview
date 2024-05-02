@@ -15,7 +15,7 @@ const CUSTOM_FIELD_DEFINITION: CustomField[] = [
         id: "d84cf1b4-06cb-4c4d-8d0f-c459571baade",
       },
       {
-        label: "Option 2",
+        label: "Option 2 Changed",
         value: "option2",
         id: "610c84b0-e3b7-44ef-895c-0aa33282fa75",
       },
@@ -48,7 +48,7 @@ function createWorkspaceSeedPrismaArguments(args: {
           value: {
             label: "Option 1",
             value: "option1",
-            id: "610c84b0-e3b7-44ef-895c-0aa33282fa75",
+            id: "d84cf1b4-06cb-4c4d-8d0f-c459571baade",
           },
         },
         dueDate: {
@@ -64,9 +64,9 @@ function createWorkspaceSeedPrismaArguments(args: {
         customField1: {
           type: "multi-dropdown",
           value: {
-            label: "Option 1",
-            value: "option1",
-            id: "d84cf1b4-06cb-4c4d-8d0f-c459571baade",
+            label: "Option 2",
+            value: "option2",
+            id: "610c84b0-e3b7-44ef-895c-0aa33282fa75",
           },
         },
         customField2: {
